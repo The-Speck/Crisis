@@ -12,6 +12,10 @@ module.exports = {
     'airbnb',
   ],
   rules: {
+    'react/jsx-filename-extension': [
+      2,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     '@typescript-eslint/no-var-requires': 0,
     'linebreak-style': 0,
     'import/extensions': [

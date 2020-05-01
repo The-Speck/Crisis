@@ -20,6 +20,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "App.tsx"],
+  "include": ["src", "./App.tsx"],
   "exclude": ["node_modules", "**/*.test.*"]
 }
