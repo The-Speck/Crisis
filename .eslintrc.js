@@ -16,6 +16,7 @@ module.exports = {
       2,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
+    // 'react/jsx-closing-bracket-location': [1, { selfClosing: 'after-props' }],
     '@typescript-eslint/no-var-requires': 0,
     'linebreak-style': 0,
     'import/extensions': [

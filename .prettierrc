@@ -7,5 +7,5 @@
   "newline-before-return": true,
   "no-duplicate-variable": [true, "check-parameters"],
   "no-var-keyword": true,
-  "jsxBracketSameLine": true
+  "bracketSpacing": true
 }
