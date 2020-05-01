@@ -1,0 +1,17 @@
+{
+  "name": "krysis",
+  "displayName": "krysis",
+  "expo": {
+    "name": "krysis",
+    "slug": "krysis",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
