@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Router from './src/config/routes';
+import Router from './src/components/routes';
 
 // const styles = StyleSheet.create({
 //   container: {

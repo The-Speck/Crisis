@@ -22,18 +22,8 @@ export const Routes = (): JSX.Element => {
   }
   return (
     <Router>
-      <Stack
-        key="root"
-        navigationBarStyle={{ backgroundColor: '#fff' }}
-        titleStyle={navTitleStyle}
-      >
-        <Scene
-          backButtonTintColor="#1E1611"
-          key="Main"
-          component={Main}
-          title="Main"
-          initial
-        />
+      <Stack key="root" navigationBarStyle={{ backgroundColor: '#fff' }} titleStyle={navTitleStyle}>
+        <Scene backButtonTintColor="#1E1611" key="Main" component={Main} title="Main" initial />
       </Stack>
     </Router>
   );
