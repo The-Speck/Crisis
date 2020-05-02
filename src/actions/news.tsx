@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import { fetchTopNewsHeadlines } from '../apis/news';
+import { fetchTopNewsHeadlines } from '../apis';
 import { NEWS_API_URL } from '../config';
-import { TopNewsOptions } from '../models/news';
+import { TopNewsOptions } from '../models';
 import { createNewsQuery } from '../utils';
 
 export const RECIEVE_TOP_HEADLINES = 'RECIEVE_TOP_HEADLINES';
