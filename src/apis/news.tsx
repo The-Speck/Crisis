@@ -1,15 +1,15 @@
+import { ResponseException } from '../errors';
 import { NewsAPIResponse } from '../models';
-import { handleResponse } from '../utils';
+import { devLog, handleResponse } from '../utils';
 
-export const fetchTopNewsHeadlines = async (url: string): Promise<Response> => {
+export const fetchTopNewsHeadlines = async (url: string): Promise<NewsAPIResponse> => {
   const response = await fetch(url, { method: 'GET' });
-  return handleResponse<NewsAPIResponse>(response);
+  const payload = await handleResponse<NewsAPIResponse>(response);
+
+  if (payload.status === 'ok') {
+    return payload;
+  } else {
+    devLog(payload.message, payload.code);
+    throw new ResponseException('Error retrieving news');
+  }
 };
-
-// .then((response) => response.json())
-// .catch();
-
-export const fetchEveryNews = (url: string): Promise<Response> =>
-  fetch(url, {
-    method: 'GET',
-  });

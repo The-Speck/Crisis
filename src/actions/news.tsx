@@ -18,11 +18,3 @@ export const getTopNewsHeadlines = (options = defaultOptions) => async (dispatch
     headlines,
   });
 };
-
-export interface EverythingNewsOptions {
-  sources: string;
-  q: string;
-  category: string;
-  language: string;
-  country: string;
-}
