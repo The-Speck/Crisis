@@ -1,4 +1,4 @@
-import ConfigException from '../errors/ConfigException';
+import { ConfigException } from '../errors';
 
 /**
  * This file is structured in a specific way to satisify typescipt while maintaining
