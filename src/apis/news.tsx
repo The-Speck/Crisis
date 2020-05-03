@@ -1,15 +1,13 @@
-import { ResponseException } from '../errors';
 import { NewsAPIResponse } from '../models';
-import { devLog, handleResponse } from '../utils';
+import { devLog, handleJsonResponse } from '../utils';
 
 export const fetchTopNewsHeadlines = async (url: string): Promise<NewsAPIResponse> => {
   const response = await fetch(url, { method: 'GET' });
-  const payload = await handleResponse<NewsAPIResponse>(response);
+  const payload = await handleJsonResponse<NewsAPIResponse>(response);
 
-  if (payload.status === 'ok') {
-    return payload;
-  } else {
+  if (payload.status === 'error') {
     devLog(payload.message, payload.code);
-    throw new ResponseException('Error retrieving news');
   }
+
+  return payload;
 };

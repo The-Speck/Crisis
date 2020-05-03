@@ -5,7 +5,7 @@ export type NewsAPIResponse = NewsAPIResponseOK | NewsAPIResponseError;
 export interface NewsAPIResponseOK {
   status: 'ok';
   totalResults: number;
-  article: Article[];
+  articles: Article[];
 }
 
 export interface NewsAPIResponseError {
