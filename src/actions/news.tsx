@@ -11,28 +11,29 @@ export const ERROR_TOP_HEADLINES = 'ERROR_TOP_HEADLINES';
 const defaultOptions: TopNewsOptions = { country: 'us' };
 
 export const getTopNewsHeadlines = (options = defaultOptions) => async (dispatch: Dispatch): Promise<void> => {
-  dispatch({
+  await dispatch({
     type: RETRIEVING_TOP_HEADLINES,
   });
 
   const queryUrl = createNewsQuery(options);
   const url = `${NEWS_API_URL}?${queryUrl}`;
-  const headlines = await fetchTopNewsHeadlines(url);
+  const response = await fetchTopNewsHeadlines(url);
 
-  if (headlines.status === 'ok') {
+  if (response.status === 'ok') {
     dispatch({
       type: RECEIVE_TOP_HEADLINES,
-      headlines,
+      headlines: response,
     });
   } else {
     dispatch({
       type: ERROR_TOP_HEADLINES,
+      error: response,
     });
   }
 };
 
 export interface RetrievingTopNewsAction {
-  type: typeof RECEIVE_TOP_HEADLINES;
+  type: typeof RETRIEVING_TOP_HEADLINES;
 }
 
 export interface ReceiveTopNewsAction {
@@ -42,6 +43,7 @@ export interface ReceiveTopNewsAction {
 
 export interface ErrorTopNewsAction {
   type: typeof ERROR_TOP_HEADLINES;
+  error: any;
 }
 
 export type NewsActions = ReceiveTopNewsAction | ErrorTopNewsAction | RetrievingTopNewsAction;

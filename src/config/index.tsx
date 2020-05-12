@@ -1,10 +1,10 @@
 import { ConfigException } from '../errors';
 
-/**
- * This file is structured in a specific way to satisify typescipt while maintaining
- * dynamic loading for different environments. As more config options are added,
- * we must expand the interface and object deconstructor below.
- */
+/*************************************************************************************
+ * The export in this file is structured in a specific way to satisify typescipt     *
+ * while maintaining dynamic loading for different environments. As more config      *
+ * options are added, we must expand the interface and object deconstructor below.   *
+ *************************************************************************************/
 
 export interface ConfigOptions {
   NEWS_API_URL: string;
