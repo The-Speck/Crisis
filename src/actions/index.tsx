@@ -1,5 +1,6 @@
-export * from './news';
+import { Action, Dispatch } from 'redux';
 
-export interface Action {
-  type: string;
-}
+export * from './news';
+export type DispatchableAction<T extends Action, P = false> = (
+  dispatch: Dispatch<T>,
+) => P extends true ? Promise<T> : T;
