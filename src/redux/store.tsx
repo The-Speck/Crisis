@@ -9,6 +9,6 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
-const enhancer = compose(applyMiddleware(...middlewares));
+const enhancers = compose(applyMiddleware(...middlewares));
 
-export default createStore(reducers, enhancer);
+export default createStore(reducers, enhancers);

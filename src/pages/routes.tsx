@@ -1,9 +1,9 @@
 import { AppLoading } from 'expo';
 import * as React from 'react';
 import { Router, Scene, Stack } from 'react-native-router-flux';
-import Main from '../pages';
+import Home from '../scenes/home';
 
-export const Routes = (): JSX.Element => {
+const Routes = (): JSX.Element => {
   const [isReady, setReady] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -23,7 +23,7 @@ export const Routes = (): JSX.Element => {
   return (
     <Router>
       <Stack key="root" navigationBarStyle={{ backgroundColor: '#fff' }} titleStyle={navTitleStyle}>
-        <Scene backButtonTintColor="#1E1611" key="Main" component={Main} title="Main" initial />
+        <Scene key="Home" component={Home} title="Headlines" initial />
       </Stack>
     </Router>
   );

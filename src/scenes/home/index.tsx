@@ -8,7 +8,7 @@ import NewsItem from '../../components/NewsItem';
 import { Article } from '../../models';
 import { RootState } from '../../redux/root';
 
-export interface HomeProps extends PropsFromRedux {}
+export type HomeProps = PropsFromRedux;
 
 const Home = (props: HomeProps): React.ReactElement<HomeProps> => {
   const { articles, isFetching, hasError, errorMsg, getTopNewsHeadlines } = props;

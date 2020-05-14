@@ -1,4 +1,3 @@
-import { ResponseException } from '../errors';
 import { devLog } from './devLog';
 
 export const handleJsonResponse = async function <T>(response: Response): Promise<T> {
@@ -8,5 +7,5 @@ export const handleJsonResponse = async function <T>(response: Response): Promis
     devLog(response.status, response.statusText);
   }
 
-  throw new ResponseException('Connection error!');
+  // TODO: Handle errors here. Perfereably make generic error response.
 };

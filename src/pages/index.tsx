@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// TODO: Delete this file after setting up home page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

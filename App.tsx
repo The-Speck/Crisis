@@ -1,15 +1,12 @@
 import * as React from 'react';
-import Router from './src/components/routes';
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+import { Provider } from 'react-redux';
+import Router from './src/pages/routes';
+import store from './src/redux/store';
 
 export default function App(): JSX.Element {
-  return <Router />;
+  return (
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  );
 }
