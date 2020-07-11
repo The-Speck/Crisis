@@ -1,17 +1,11 @@
 {
-  "name": "krysis",
-  "displayName": "krysis",
+  "name": "Crisis",
+  "displayName": "Crisis",
   "expo": {
-    "name": "krysis",
-    "slug": "krysis",
+    "name": "Crisis",
+    "slug": "Crisis",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "platforms": ["ios", "android", "web"],
+    "assetBundlePatterns": ["**/*"]
   }
 }
