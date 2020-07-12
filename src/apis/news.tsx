@@ -1,14 +1,12 @@
-import { NewsAPIResponse } from '../models';
-import { devLog, handleJsonResponse } from '../utils';
+import { ApiResponse, Article, NewsOptions } from '../models';
+import { handleJsonResponse } from '../utils';
+import { fetchApi } from './apiWrapper';
 
-// TODO: Catch a failed fetch and return a generic error
-export const fetchTopNewsHeadlines = async (url: string): Promise<NewsAPIResponse> => {
-  const response = await fetch(url, { method: 'GET' }).catch((e) => ({}));
-  const payload = await handleJsonResponse<NewsAPIResponse>(response);
+export const fetchTopNewsHeadlines = async (
+  url: string,
+  options: NewsOptions,
+): Promise<ApiResponse<Article[]>> => {
+  const response = await fetchApi(url, { method: 'POST', body: JSON.stringify(options) });
 
-  if (payload.status === 'error') {
-    devLog(payload.message, payload.code);
-  }
-
-  return payload;
+  return handleJsonResponse<Article[]>(response);
 };

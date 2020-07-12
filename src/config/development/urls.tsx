@@ -1,2 +1,3 @@
-export const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines';
-export const SERVER_URL = '';
+export const SERVER_URL = 'http://localhost:8090/';
+
+export const NEWS_API_URL = SERVER_URL + 'news';

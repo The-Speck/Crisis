@@ -1,3 +1,5 @@
+export type NewsOptions = TopNewsOptions | EverythingNewsOptions | SourceOptions;
+
 export interface TopNewsOptions {
   sources?: string;
   q?: string;

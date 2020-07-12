@@ -1,2 +1,2 @@
-export * from './ErrorResponse';
+export * from './ApiResponse';
 export * from './news';
