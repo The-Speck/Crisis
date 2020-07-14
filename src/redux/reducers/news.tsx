@@ -1,7 +1,12 @@
 import { NewsActions, NewsActionType } from '../../actions';
 import { Article } from '../../models';
 
-const initialState = { isFetching: true, articles: [], hasError: false, errorMsg: 'Error Retreiving News' };
+const initialState = {
+  isFetching: true,
+  articles: [],
+  hasError: false,
+  errorMsg: 'Error Retreiving News',
+};
 
 export interface NewsState {
   articles: Article[];
@@ -16,9 +21,7 @@ const newsReducer = (state: NewsState = initialState, action: NewsActions): News
       return { ...state, isFetching: true };
     }
     case NewsActionType.RECEIVE_TOP_HEADLINES: {
-      const isFetching = state.articles.length > 0 ? false : true;
-
-      return { ...state, isFetching, hasError: false };
+      return { ...state, isFetching: false, hasError: false };
     }
     case NewsActionType.ERROR_TOP_HEADLINES: {
       const { error } = action;
