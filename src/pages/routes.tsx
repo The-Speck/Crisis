@@ -1,7 +1,8 @@
 import { AppLoading } from 'expo';
 import * as React from 'react';
 import { Router, Scene, Stack } from 'react-native-router-flux';
-import Home from '../scenes/home';
+import Login from '../scenes/login';
+import News from '../scenes/news';
 
 const Routes = (): JSX.Element => {
   const [isReady, setReady] = React.useState<boolean>(false);
@@ -23,7 +24,8 @@ const Routes = (): JSX.Element => {
   return (
     <Router>
       <Stack key="root" navigationBarStyle={{ backgroundColor: '#fff' }} titleStyle={navTitleStyle}>
-        <Scene key="Home" component={Home} title="Headlines" initial />
+        <Scene key="login" component={Login} title="Login" initial />
+        <Scene key="Home" component={News} title="Headlines" />
       </Stack>
     </Router>
   );

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import * as Actions from '../../actions';
-import { NewsActions } from '../../actions';
-import NewsItem from '../../components/NewsItem';
-import { Article } from '../../models';
-import { RootState } from '../../redux/root';
+import * as Actions from '../actions';
+import { NewsActions } from '../actions';
+import NewsItem from '../components/NewsItem';
+import { Article } from '../models';
+import { RootState } from '../redux/root';
 
 export type HomeProps = PropsFromRedux;
 
