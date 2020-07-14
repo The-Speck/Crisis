@@ -1,34 +1,55 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { AppLoading } from 'expo';
 import * as React from 'react';
-import { Router, Scene, Stack } from 'react-native-router-flux';
-import Login from '../scenes/login';
-import News from '../scenes/news';
+import { connect, ConnectedProps } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../redux/root';
+import Auth from '../scenes/auth';
+import { not } from '../utils';
 
-const Routes = (): JSX.Element => {
+export type RouteProps = PropsFromRedux;
+
+const Routes = (props: RouteProps): React.ReactElement<RouteProps> => {
+  const { isAuthenticating, user } = props;
   const [isReady, setReady] = React.useState<boolean>(false);
+  const Stack = createStackNavigator();
 
   React.useEffect(() => {
     setTimeout(() => setReady(true), 1000);
   }, []);
 
-  const navTitleStyle = {
-    fontSize: 15,
-    fontFamily: 'HelveticaNeue-Medium',
-    color: '#1E1611',
-    letterSpacing: 0.4,
-  };
-
   if (!isReady) {
     return <AppLoading />;
   }
+
+  if (not(isAuthenticating) && not(user)) {
+    return <Auth />;
+  }
+
   return (
-    <Router>
-      <Stack key="root" navigationBarStyle={{ backgroundColor: '#fff' }} titleStyle={navTitleStyle}>
-        <Scene key="login" component={Login} title="Login" initial />
-        <Scene key="Home" component={News} title="Headlines" />
-      </Stack>
-    </Router>
+    <NavigationContainer>
+      <Stack.Navigator>{/* <Stack.Screen name="Home" component={Home} /> */}</Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-export default Routes;
+interface MapStateToProps {
+  user: RootState['auth']['user'];
+  isAuthenticating: RootState['auth']['isAuthenticating'];
+}
+const msp = (state: RootState): MapStateToProps => ({
+  user: state.auth.user,
+  isAuthenticating: state.auth.isAuthenticating,
+});
+
+interface MapDispatchToProps {
+  getTopNewsHeadlines: () => Promise<AuthActions>;
+}
+const mdp = (dispatch: ThunkDispatch<RootState, null, AuthActions>): MapDispatchToProps => ({
+  getUser: (): Promise<AuthActions> => dispatch(Actions.getUser()),
+});
+
+const connector = connect(msp, mdp);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+export default connector(Routes);

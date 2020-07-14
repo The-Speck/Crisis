@@ -8,9 +8,9 @@ import NewsItem from '../components/NewsItem';
 import { Article } from '../models';
 import { RootState } from '../redux/root';
 
-export type HomeProps = PropsFromRedux;
+export type NewsProps = PropsFromRedux;
 
-const Home = (props: HomeProps): React.ReactElement<HomeProps> => {
+const News = (props: NewsProps): React.ReactElement<NewsProps> => {
   const { articles, isFetching, hasError, errorMsg, getTopNewsHeadlines } = props;
   const [isRefreshing, setRefreshing] = useState<boolean>(false);
 
@@ -38,7 +38,7 @@ const Home = (props: HomeProps): React.ReactElement<HomeProps> => {
         extraData={{}}
         renderItem={renderItem}
         initialNumToRender={5}
-        keyExtractor={(_, index): string => index.toString() + '_home'}
+        keyExtractor={(_, index): string => index.toString() + '_News'}
         refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={getNewsHeadlines} />}
       />
     );
@@ -67,4 +67,4 @@ const mdp = (dispatch: ThunkDispatch<RootState, null, NewsActions>): MapDispatch
 
 const connector = connect(msp, mdp);
 type PropsFromRedux = ConnectedProps<typeof connector>;
-export default connector(Home);
+export default connector(News);
