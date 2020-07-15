@@ -8,6 +8,11 @@ import { ConfigException } from '../errors';
 
 export interface ConfigOptions {
   TOP_NEWS_API_URL: string;
+  AUTH_API_URL: string;
+  SIGNUP_API_URL: string;
+  LOGIN_API_URL: string;
+  AUTH_REFRESH_API_URL: string;
+  LOGOUT_API_URL: string;
 }
 
 let configOptions: ConfigOptions;
@@ -23,4 +28,11 @@ switch (process.env.NODE_ENV) {
     throw new ConfigException(`Invalid Url Environment ${process.env.NODE_ENV}`);
 }
 
-export const { TOP_NEWS_API_URL } = configOptions;
+export const {
+  TOP_NEWS_API_URL,
+  AUTH_API_URL,
+  SIGNUP_API_URL,
+  LOGIN_API_URL,
+  AUTH_REFRESH_API_URL,
+  LOGOUT_API_URL,
+} = configOptions;

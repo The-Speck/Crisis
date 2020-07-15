@@ -2,7 +2,7 @@ import { ApiResponse, Article, NewsOptions } from '../models';
 import { handleJsonResponse } from '../utils';
 import { fetchApi } from './apiWrapper';
 
-export const fetchTopNewsHeadlines = async (
+export const fetchTopNewsHeadlinesApi = async (
   url: string,
   options: NewsOptions,
 ): Promise<ApiResponse<Article[]>> => {

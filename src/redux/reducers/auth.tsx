@@ -1,4 +1,4 @@
-import { NewsActionType } from '../../actions';
+import { AuthActions, AuthActionType } from '../../actions';
 import { User } from '../../models/auth';
 
 const initialState = {
@@ -17,13 +17,13 @@ export interface AuthState {
 
 const authReducer = (state: AuthState = initialState, action: AuthActions): AuthState => {
   switch (action.type) {
-    case NewsActionType.RETRIEVING_TOP_HEADLINES: {
+    case AuthActionType.RETRIEVING_USER: {
       return { ...state, isAuthenticating: true };
     }
-    case NewsActionType.RECEIVE_TOP_HEADLINES: {
+    case AuthActionType.RECEIVE_USER: {
       return { ...state, isAuthenticating: false, hasError: false };
     }
-    case NewsActionType.ERROR_TOP_HEADLINES: {
+    case AuthActionType.ERROR_USER: {
       const { error } = action;
       return { ...state, isAuthenticating: false, hasError: true, errorMsg: error };
     }
