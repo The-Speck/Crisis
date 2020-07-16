@@ -1,46 +1,50 @@
 import { AsyncStorage } from 'react-native';
-import { AUTH_REFRESH_API_URL } from '../config';
-import { ApiResponse, Article, NewsOptions, User } from '../models';
-import { handleJsonResponse } from '../utils';
+import { AUTH_REFRESH_API_URL, GET_USER_URL, LOGIN_API_URL } from '../config';
+import { ApiResponse, AuthTokens, Credentials, User } from '../models';
+import { handleJsonResponse, ResponseStatus } from '../utils';
 import { fetchApi } from './apiWrapper';
 
-interface AuthTokens {
-  access: string;
-  refresh: string;
-}
+const setTokens = async (response: Response): Promise<ApiResponse<AuthTokens>> => {
+  const handledResponse = await handleJsonResponse<AuthTokens>(response);
 
-export const refreshTokenApi = async (): Promise<AuthTokens | null> => {
-  const refresh = await AsyncStorage.getItem('refresh_token');
+  if (handledResponse.status === ResponseStatus.OK) {
+    const tokens = handledResponse.data;
+    AsyncStorage.setItem('access_token', tokens.access);
+    AsyncStorage.setItem('refresh_token', tokens.refresh);
+  }
 
-  return fetch(AUTH_REFRESH_API_URL, {
-    method: 'POST',
-    body: JSON.stringify({ refresh }),
-  }).then(async (response: Response) => {
-    if (response.ok) {
-      const tokens = await response.json();
-      AsyncStorage.setItem('access_token', tokens.access);
-      AsyncStorage.setItem('refresh_token', tokens.refresh);
-
-      return tokens;
-    }
-
-    return null;
-  });
+  return handledResponse;
 };
 
-export const obtainTokenApi = () => {};
+export const refreshTokenApi = async (): Promise<ApiResponse<AuthTokens>> => {
+  const refresh = await AsyncStorage.getItem('refresh_token');
+  const response = await fetch(AUTH_REFRESH_API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ refresh }),
+  });
 
-export const fetchUserApi = async (
-  url: string,
-  options: NewsOptions,
-): Promise<ApiResponse<User>> => {
-  const tokens = await refreshTokenApi();
+  return setTokens(response);
+};
 
-  if (tokens) {
-    const response = await fetchApi(url, { method: 'POST', body: JSON.stringify(options) });
+export const obtainTokenApi = async ({
+  email,
+  password,
+}: Credentials): Promise<ApiResponse<AuthTokens>> => {
+  const response = await fetch(LOGIN_API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
 
-    return handleJsonResponse<Article[]>(response);
-  } else {
-    return null;
+  return setTokens(response);
+};
+
+export const fetchUserApi = async (): Promise<ApiResponse<User>> => {
+  const refreshTokenResponse = await refreshTokenApi();
+
+  if (refreshTokenResponse.status == ResponseStatus.OK) {
+    const refreshTokenResponse = await fetchApi(GET_USER_URL, { method: 'GET' });
+    return handleJsonResponse<User>(refreshTokenResponse);
   }
+
+  return refreshTokenResponse;
 };

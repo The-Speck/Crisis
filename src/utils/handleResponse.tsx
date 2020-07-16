@@ -40,9 +40,9 @@ export const handleResponse = async function <T>(
     }
   } catch (error) {
     devLog(response.status, response.statusText, error);
-  } finally {
-    return createResponseError(response);
   }
+
+  return createResponseError(response);
 };
 
 export const handleJsonResponse = async function <T>(response: Response): Promise<ApiResponse<T>> {

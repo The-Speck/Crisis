@@ -1,7 +1,6 @@
 import { Action } from 'redux';
 import { DispatchableAction } from '.';
 import { fetchTopNewsHeadlinesApi } from '../apis';
-import { TOP_NEWS_API_URL } from '../config';
 import { Article, TopNewsOptions } from '../models';
 import { ResponseStatus } from '../utils';
 
@@ -20,7 +19,7 @@ export const getTopNewsHeadlines = (
     type: NewsActionType.RETRIEVING_TOP_HEADLINES,
   });
 
-  const response = await fetchTopNewsHeadlinesApi(TOP_NEWS_API_URL, options);
+  const response = await fetchTopNewsHeadlinesApi(options);
 
   if (response.status === ResponseStatus.OK) {
     return dispatch({

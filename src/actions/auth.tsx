@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { DispatchableAction } from '.';
-import { LOGIN_API_URL } from '../config';
+import { fetchUserApi } from '../apis';
 import { User } from '../models';
 import { ResponseStatus } from '../utils';
 
@@ -10,19 +10,14 @@ export enum AuthActionType {
   ERROR_USER = 'ERROR_USER',
 }
 
-interface Credentials {
-  email: string;
-  password: string;
-}
-
-export const fetchUser = (
-  credentials: Credentials,
-): DispatchableAction<AuthActions, true> => async (dispatch): Promise<AuthActions> => {
+export const fetchUser = (): DispatchableAction<AuthActions, true> => async (
+  dispatch,
+): Promise<AuthActions> => {
   dispatch({
     type: AuthActionType.RETRIEVING_USER,
   });
 
-  const response = await fetchUserApi(LOGIN_API_URL, credentials);
+  const response = await fetchUserApi();
 
   if (response.status === ResponseStatus.OK) {
     return dispatch({

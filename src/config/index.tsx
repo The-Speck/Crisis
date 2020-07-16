@@ -13,6 +13,7 @@ export interface ConfigOptions {
   LOGIN_API_URL: string;
   AUTH_REFRESH_API_URL: string;
   LOGOUT_API_URL: string;
+  GET_USER_URL: string;
 }
 
 let configOptions: ConfigOptions;
@@ -35,4 +36,5 @@ export const {
   LOGIN_API_URL,
   AUTH_REFRESH_API_URL,
   LOGOUT_API_URL,
+  GET_USER_URL,
 } = configOptions;
