@@ -39,12 +39,6 @@ export const obtainTokenApi = async ({
 };
 
 export const fetchUserApi = async (): Promise<ApiResponse<User>> => {
-  const refreshTokenResponse = await refreshTokenApi();
-
-  if (refreshTokenResponse.status == ResponseStatus.OK) {
-    const refreshTokenResponse = await fetchApi(GET_USER_URL, { method: 'GET' });
-    return handleJsonResponse<User>(refreshTokenResponse);
-  }
-
-  return refreshTokenResponse;
+  const refreshTokenResponse = await fetchApi(GET_USER_URL, { method: 'GET' });
+  return handleJsonResponse<User>(refreshTokenResponse);
 };
