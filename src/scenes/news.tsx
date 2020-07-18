@@ -3,7 +3,6 @@ import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as Actions from '../actions';
-import { NewsActions } from '../actions';
 import NewsItem from '../components/NewsItem';
 import { Article } from '../models';
 import { RootState } from '../redux/root';
@@ -59,10 +58,12 @@ const msp = (state: RootState): MapStateToProps => ({
 });
 
 interface MapDispatchToProps {
-  getTopNewsHeadlines: () => Promise<NewsActions>;
+  getTopNewsHeadlines: () => Promise<Actions.NewsActions>;
 }
-const mdp = (dispatch: ThunkDispatch<RootState, null, NewsActions>): MapDispatchToProps => ({
-  getTopNewsHeadlines: (): Promise<NewsActions> => dispatch(Actions.getTopNewsHeadlines()),
+const mdp = (
+  dispatch: ThunkDispatch<RootState, null, Actions.NewsActions>,
+): MapDispatchToProps => ({
+  getTopNewsHeadlines: (): Promise<Actions.NewsActions> => dispatch(Actions.getTopNewsHeadlines()),
 });
 
 const connector = connect(msp, mdp);

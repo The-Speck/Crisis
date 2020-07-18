@@ -4,6 +4,7 @@ import { AppLoading } from 'expo';
 import * as React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import * as Actions from '../actions';
 import { RootState } from '../redux/root';
 import Auth from '../scenes/auth';
 import { not } from '../utils';
@@ -11,20 +12,19 @@ import { not } from '../utils';
 export type RouteProps = PropsFromRedux;
 
 const Routes = (props: RouteProps): React.ReactElement<RouteProps> => {
-  const { isAuthenticating, user } = props;
-  const [isReady, setReady] = React.useState<boolean>(false);
+  const { isAuthenticating, user, fetchUser } = props;
   const Stack = createStackNavigator();
 
   React.useEffect(() => {
-    setTimeout(() => setReady(true), 1000);
+    fetchUser();
   }, []);
-
-  if (!isReady) {
-    return <AppLoading />;
-  }
 
   if (not(isAuthenticating) && not(user)) {
     return <Auth />;
+  }
+
+  if (isAuthenticating) {
+    return <AppLoading />;
   }
 
   return (
@@ -44,10 +44,12 @@ const msp = (state: RootState): MapStateToProps => ({
 });
 
 interface MapDispatchToProps {
-  getTopNewsHeadlines: () => Promise<AuthActions>;
+  fetchUser: () => Promise<Actions.AuthActions>;
 }
-const mdp = (dispatch: ThunkDispatch<RootState, null, AuthActions>): MapDispatchToProps => ({
-  getUser: (): Promise<AuthActions> => dispatch(Actions.getUser()),
+const mdp = (
+  dispatch: ThunkDispatch<RootState, null, Actions.AuthActions>,
+): MapDispatchToProps => ({
+  fetchUser: (): Promise<Actions.AuthActions> => dispatch(Actions.fetchUser()),
 });
 
 const connector = connect(msp, mdp);
