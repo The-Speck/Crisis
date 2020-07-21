@@ -1,4 +1,4 @@
-export const SERVER_URL = 'http://localhost:8090/';
+export const SERVER_URL = 'http://localhost:8000/api/';
 
 // News
 export const NEWS_API_URL = SERVER_URL + 'news/';

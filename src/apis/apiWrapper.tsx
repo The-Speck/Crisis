@@ -3,6 +3,14 @@ import { AsyncStorage } from 'react-native';
 import { refreshTokenApi } from '.';
 import { devLog } from '../utils';
 
+export enum HttpMethods {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
+}
+
 const createOptions = async (init: RequestInit = {}): Promise<Partial<RequestInit>> => {
   const access = await AsyncStorage.getItem('access_token');
   return merge({}, init, { headers: { Authorization: `JWT ${access}` } });

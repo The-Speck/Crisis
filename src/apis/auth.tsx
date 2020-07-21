@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { AUTH_REFRESH_API_URL, GET_USER_URL, LOGIN_API_URL } from '../config';
 import { ApiResponse, AuthTokens, Credentials, User } from '../models';
 import { handleJsonResponse, ResponseStatus } from '../utils';
-import { fetchApi } from './apiWrapper';
+import { fetchApi, HttpMethods } from './apiWrapper';
 
 const setTokens = async (response: Response): Promise<ApiResponse<AuthTokens>> => {
   const handledResponse = await handleJsonResponse<AuthTokens>(response);
@@ -19,7 +19,11 @@ const setTokens = async (response: Response): Promise<ApiResponse<AuthTokens>> =
 export const refreshTokenApi = async (): Promise<ApiResponse<AuthTokens>> => {
   const refresh = await AsyncStorage.getItem('refresh_token');
   const response = await fetch(AUTH_REFRESH_API_URL, {
-    method: 'POST',
+    method: HttpMethods.POST,
+    headers: {
+      Accept: 'application/json, text/plain',
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
     body: JSON.stringify({ refresh }),
   });
 
@@ -31,7 +35,7 @@ export const obtainTokenApi = async ({
   password,
 }: Credentials): Promise<ApiResponse<AuthTokens>> => {
   const response = await fetch(LOGIN_API_URL, {
-    method: 'POST',
+    method: HttpMethods.POST,
     body: JSON.stringify({ email, password }),
   });
 
